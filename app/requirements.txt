@@ -1,0 +1,7 @@
+numpy
+Pillow
+shapely
+opencv-python
+torch
+torchvision
+requests
