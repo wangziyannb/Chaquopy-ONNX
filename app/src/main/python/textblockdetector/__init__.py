@@ -48,7 +48,6 @@ def postprocess_mask(img: Union[torch.Tensor, np.ndarray], thresh=None):
 
 def postprocess_yolo(det, conf_thresh, nms_thresh, resize_ratio, sort_func=None):
     det = non_max_suppression(det, conf_thresh, nms_thresh)[0]
-    print(det)
     # bbox = det[..., 0:4]
     if det.device != 'cpu':
         det = det.detach_().cpu().numpy()
@@ -90,11 +89,6 @@ class TextDetector:
 
     def postprocessing(self, im_h, im_w, dw, dh, img, blks, mask, lines_map, refine_mode=REFINEMASK_INPAINT,
                        keep_undetected_mask=False, bgr2rgb=True):
-        print("im_h:" + str(im_h))
-        print("im_h:" + str(im_w))
-        print("im_h:" + str(dw))
-        print("im_h:" + str(dh))
-
         resize_ratio = (im_w / (self.input_size[0] - dw), im_h / (self.input_size[1] - dh))
         blks = postprocess_yolo(blks, self.conf_thresh, self.nms_thresh, resize_ratio)
         mask = postprocess_mask(mask)

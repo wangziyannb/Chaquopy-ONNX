@@ -22,7 +22,6 @@ def postprocessing(im_h, im_w, dw, dh, img, blks1, blks2, mask, lines_map):
     img = Image.open(img).convert('RGB')
     img = np.array(img)
     blks = np.concatenate((blks1,blks2), axis=1)
-    print(blks.shape)
     mask, final_mask, textlines = model.postprocessing(im_h, im_w, dw, dh, img, blks, mask, lines_map,
                                                        refine_mode=REFINEMASK_INPAINT, keep_undetected_mask=False,
                                                        bgr2rgb=False)

@@ -55,7 +55,6 @@ def get_otsuthresh_masklist(img, pred_mask, per_channel=False) -> List[np.ndarra
 
 def get_topk_masklist(im_grey, pred_mask):
     if len(im_grey.shape) == 3 and im_grey.shape[-1] == 3:
-        print(im_grey)
         im_grey = cv2.cvtColor(im_grey, cv2.COLOR_BGR2GRAY)
     msk = np.ascontiguousarray(pred_mask)
     candidate_grey_px = im_grey[np.where(cv2.erode(msk, np.ones((3,3), np.uint8), iterations=1) > 127)]
